@@ -36,6 +36,85 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
+        <script>
+            function setGeoJson() {
+                const requestURL = '/json/tokyo.city.geojson';
+                const request = new XMLHttpRequest();
+                request.open('GET', requestURL);
+                request.responseType = 'json';
+                request.send();
+                request.onload = function () {
+                    let data = request.response;
+                    data = JSON.parse(JSON.stringify(data));
+                    map.data.addGeoJson(data);
+                }
+            }
+
+            let map;
+            const centerLocation = { lat: 35.6727, lng: 139.662 };
+                        
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("map"), {
+                  center: centerLocation,
+                  zoom: 8,
+                });
+            
+                var infoWindow = new google.maps.InfoWindow();
+
+                // ポリゴンのスタイル設定
+                const selectedPolygonStyleOptions = {
+                  strokeColor: "#810FCB",
+                  strokeOpacity: 1.0,
+                  strokeWeight: 2.0,
+                  fillColor: "#810FCB",
+                  fillOpacity: 0.5,
+                };
+
+                // ポリゴンのスタイル設定
+                const defaultPolygonStyleOptions = {
+                  strokeColor: "#0e8dcc",
+                  strokeOpacity: 1.0,
+                  strokeWeight: 2.0,
+                  fillColor: "#0eaccc",
+                  fillOpacity: 0.5,
+                };
+
+                const updateStyle = (() => {
+                    map.data.setStyle((feature) => {
+                        if (feature.getGeometry().getType() === "MultiPolygon") {
+                            if (feature.getProperty('selected')) {
+                                return selectedPolygonStyleOptions;
+                            } else {
+                                return defaultPolygonStyleOptions;
+                            }
+                        }
+                            return null;
+                    });
+                });
+
+	            // クリックイベントの定義
+	            map.data.addListener('click', function(event) {
+                    event.feature.setProperty('selected', event.feature.getProperty('selected') ? false : true);
+                    updateStyle();
+	            	// 表示位置
+	            	infoWindow.setPosition(event.latLng);
+	            	// InfoWindow内のの内容
+	            	infoWindow.setContent('<h3>' + event.feature.getProperty('N03_001') + '</h3><br/>');
+	            	// IndowWindowを表示
+	            	infoWindow.open(map);
+	            });
+
+
+
+                // GeoJSONでポリゴンを準備
+                setGeoJson();
+
+                updateStyle();
+
+            }
+            
+            window.initMap = initMap;            
+        </script>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -50,8 +129,7 @@
         <title>ポスティング見積.com -簡単3ステップでお見積！安心・信頼の高品質ポスティングをご提案します-</title>
         <meta name="Description" content="ポスティング見積.comでは、専門の担当者がお客様の要望をヒアリングし、配布エリア・配布単価・配布日程によって、最適な会社での御提案・お見積りをお届けいたします。一括見積のサイトと異なり、複数のポスティング会社から見積もりを取る必要はありません。わずらわしい業務は全てポスティング見積.comにお任せください！">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/init.css">
-        <link rel="stylesheet" href="style.css">
+        <link href="./css/output.css" rel="stylesheet">
         <script src="https://posting-m.com/js/jquery-3.4.1.min.js"></script>
         <script src="https://posting-m.com/js/page.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -261,6 +339,8 @@
                 <a href="#form"></a>
             </div>
         </div>
+        <div id="map" style="height:500px; width:500px;"></div>
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGvot-JPnxY4V54GDN3DdoAo7OvyNrpq0&callback=initMap"></script>
         <button onclick="location.href='#form';document.getElementsByName('type')[0].value='1';">PR</button>
         <button onclick="location.href='#form';document.getElementsByName('type')[0].value='2';">集客</button>
         <button onclick="location.href='#form';document.getElementsByName('type')[0].value='3';">求人</button>
@@ -310,7 +390,7 @@
             </section>
         </div>
         <div class="wrapper">
-            <section id="form">
+                <section id="form">
                 <h2>お見積はこちらから</h2>
                 <p>※お電話でのご相談をご希望の方は
                     <a href="tel:05035570187" class="">050-3550-0735</a>（受付時間 平日10:00～19:00）までお願いいたします。
