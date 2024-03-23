@@ -1,7 +1,9 @@
 <?php
-    require 'Logger/logger.php';
+    require 'lib/php/Logger/logger.php';
 
-    $log = Logger::getInstance();
+    use lib\logger as logger;
+
+    $log = logger\Logger::getInstance();
 
     $type = $_GET['type'];
     $state = $_GET['state'];
