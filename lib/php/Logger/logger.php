@@ -1,4 +1,6 @@
 <?php
+
+namespace lib\logger;
 require 'config.php';
 
 /**
@@ -82,7 +84,7 @@ class Logger {
             $pid = getmypid();
             $time = $this->getTime();
             $logMessage = "[{$time}][{$pid}][{$level}] " . rtrim($msg) . "\n";
-            $logFilePath = Config::LOGDIR_PATH . Config::LOGFILE_NAME . '.log';
+            $logFilePath = $_SERVER['DOCUMENT_ROOT'] . Config::LOGDIR_PATH . Config::LOGFILE_NAME . '.log';
 
             $result = file_put_contents($logFilePath, $logMessage, FILE_APPEND | LOCK_EX);
             if(!$result) {
@@ -108,13 +110,13 @@ class Logger {
                 }
 
                 // 古いログファイルを削除する
-                $retentionDate = new DateTime();
+                $retentionDate = new \DateTime();
                 $retentionDate->modify('-' . Config::LOGFILE_PERIOD . ' day');
                 if ($dh = opendir(Config::LOGDIR_PATH)) {
                     while (($fileName = readdir($dh)) !== false) {
                         $pm = preg_match("/" . preg_quote(Config::LOGFILE_NAME) . "_(\d{14}).*\.gz/", $fileName, $matches);
                         if($pm === 1) {
-                            $logCreatedDate = DateTime::createFromFormat('YmdHis', $matches[1]);
+                            $logCreatedDate = \DateTime::createFromFormat('YmdHis', $matches[1]);
                             if($logCreatedDate < $retentionDate) {
                                 unlink(Config::LOGDIR_PATH . '/' . $fileName);
                             }
