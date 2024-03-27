@@ -27,28 +27,28 @@ if($_SERVER["REQUEST_METHOD"] != "GET"){
                         'is_empty_state' => empty($state),
                         'is_empty_city' => empty($city),
                         'is_empty_busu' => empty($busu),
-                        'price' => 0);
+                        'cost' => 0);
 
         echo json_encode($result);
         return;
     }
         
     //SQLを作成
-    $sql = "SELECT (price * $busu) AS price FROM price WHERE state = '$state' AND city = '$city' AND type = '$type'";
+    $sql = "SELECT (cost * $busu) AS cost FROM cost WHERE state = '$state' AND city = '$city' AND type = '$type'";
     
     //$pdoにあるqueryメソッドを呼び出してSQLを実行
     //出力結果を$rowに代入
     $rows = $db->fetchAll($sql);
     
     //出力結果をそれぞれの配列に格納
-    $price = array_column($rows,'price')[0];
+    $cost = array_column($rows,'cost')[0];
 
     $result = array('result' => true,
                     'is_empty_type' => empty($type),
                     'is_empty_state' => empty($state),
                     'is_empty_city' => empty($city),
                     'is_empty_busu' => empty($busu),
-                    'price' => $price);
+                    'cost' => $cost);
     echo json_encode($result);    
     return;
 }

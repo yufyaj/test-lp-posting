@@ -9,7 +9,7 @@
     $db = db\ConnectDb::getInstance();
     
     //SQLを作成
-    $sql = "SELECT state, city FROM price GROUP BY state, city";
+    $sql = "SELECT state, city FROM cost GROUP BY state, city";
     $rows = $db->fetchAll($sql);
     
     //出力結果をそれぞれの配列に格納
@@ -75,7 +75,7 @@
             function changeCostEstimate() {
                 clearCostValue();
 
-                const elementCalcCostButton = document.getElementById('get-price');
+                const elementCalcCostButton = document.getElementById('get-cost');
                 if (!document.getElementsByName('type')[0].value) {
                     elementCalcCostButton.disabled = true;
                     return;
@@ -98,15 +98,15 @@
 
             // 価格の初期化
             function clearCostValue() {
-                document.getElementById('label_price').innerText = "---";
-                document.getElementsByName('price')[0].value = "";
+                document.getElementById('label_cost').innerText = "---";
+                document.getElementsByName('cost')[0].value = "";
             }
 
             // 見積依頼項目に変更があった際の動作
             function changeRequestElement() {
                 const elementRequestButton = document.getElementById('send-request');
 
-                if (!document.getElementsByName('price')[0].value){
+                if (!document.getElementsByName('cost')[0].value){
                     elementRequestButton.disabled = true;
                     return;
                 }
@@ -170,15 +170,15 @@
                 const city = document.getElementsByName('city')[0].value;
                 const busu = document.getElementsByName('busu')[0].value;
 
-                const resp = await fetch(`./api/getPrice.php?state=${state}&type=${type}&city=${city}&busu=${busu}`);
+                const resp = await fetch(`./api/getCost.php?state=${state}&type=${type}&city=${city}&busu=${busu}`);
                 if (!resp.ok) {
                     return;
                 }
                 const resp_json = await resp.json();
                 if (resp_json.result) {
                     // 価格の表示
-                    document.getElementById('label_price').innerText = resp_json.price.toLocaleString();
-                    document.getElementsByName('price')[0].value = resp_json.price.toLocaleString();
+                    document.getElementById('label_cost').innerText = resp_json.cost.toLocaleString();
+                    document.getElementsByName('cost')[0].value = resp_json.cost.toLocaleString();
                     $(function(){
                         if ($("#send-info").is(":hidden")) {
                             $("#send-info").slideToggle();
@@ -198,12 +198,12 @@
                     const state = document.getElementsByName('state')[0].value;
                     const city = document.getElementsByName('city')[0].value;
                     const busu = document.getElementsByName('busu')[0].value;
-                    const price = document.getElementsByName('price')[0].value;
+                    const cost = document.getElementsByName('cost')[0].value;
                     const company = document.getElementsByName('company')[0].value;
                     const name = document.getElementsByName('name')[0].value;
                     const mail = document.getElementsByName('mail')[0].value;
                     const privacy = document.getElementsByName('privacy')[0].checked;
-                    const url = document.getElementById('mail').getAttribute("action") + `?type=${type}&state=${state}&city=${city}&busu=${busu}&price=${price}&company=${company}&name=${name}&mail=${mail}&privacy=${privacy}`;
+                    const url = document.getElementById('mail').getAttribute("action") + `?type=${type}&state=${state}&city=${city}&busu=${busu}&cost=${cost}&company=${company}&name=${name}&mail=${mail}&privacy=${privacy}`;
                     fetch(url).then((e) => {
                         if (e.redirected) {
                             window.location.href = e.url;
@@ -222,7 +222,7 @@
                 const state = "<?= array_key_exists('state', $_GET) ? $_GET['state'] : '' ?>";
                 const city = "<?= array_key_exists('city', $_GET) ? $_GET['city'] : '' ?>";
                 const busu = "<?= array_key_exists('busu', $_GET) ? $_GET['busu'] : '' ?>";
-                const price = "<?= array_key_exists('price', $_GET) ? $_GET['price'] : '' ?>";
+                const cost = "<?= array_key_exists('cost', $_GET) ? $_GET['cost'] : '' ?>";
                 const company = "<?= array_key_exists('company', $_GET) ? $_GET['company'] : '' ?>";
                 const name = "<?= array_key_exists('name', $_GET) ? $_GET['name'] : '' ?>";
                 const mail = "<?= array_key_exists('mail', $_GET) ? $_GET['mail'] : '' ?>";
@@ -251,9 +251,9 @@
                 }
 
                 changeCostEstimate();
-                if (price) {
-                    document.getElementById('label_price').innerText = price;
-                    document.getElementsByName('price')[0].value = price;
+                if (cost) {
+                    document.getElementById('label_cost').innerText = cost;
+                    document.getElementsByName('cost')[0].value = cost;
                     $("#send-info").slideDown();
                 }
                 changeRequestElement();
@@ -345,11 +345,11 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 py-5 items-center justify-items-center">
-                        <input type="hidden" name="price" />
-                        <button class="rounded text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" id="get-price" onclick="postData()" disabled>見積を算出する</button>
+                        <input type="hidden" name="cost" />
+                        <button class="rounded text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" id="get-cost" onclick="postData()" disabled>見積を算出する</button>
                         <div>
                             見積金額は
-                            <label id="label_price">---</label>
+                            <label id="label_cost">---</label>
                             です。
                         </div>
                     </div>
