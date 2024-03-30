@@ -7,7 +7,16 @@ services:
       dockerfile: Dockerfile
 
     volumes:
-      - ../..:/workspaces:cached
+      - type: bind
+        source: ../..
+        target: /workspaces
+        read_only: true
+      - type: bind
+        source: ../php.ini
+        target: /usr/local/etc/php.ini
+      - type: bind
+        source: ../xdebug.ini
+        target: /local/etc/php/conf.d/xdebug.ini
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

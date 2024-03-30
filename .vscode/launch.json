@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Listen for XDebug",
+            "type": "php",
+            "request": "launch",
+            "hostname": "0.0.0.0",  // この設定が必要
+            "port": 9003,
+            "pathMappings": {
+                "/workspaces/php-mariadb-2": "${workspaceRoot}"
+            },
+            "log": true,
+            "stopOnEntry": true,        // デバッグが有効なときにプログラムを中断する
+        }
+    ]
+}
