@@ -1,6 +1,7 @@
 <?php
-    require 'lib/php/Logger/logger.php';
-    require 'lib/php/DB/db.php';
+    require_once 'lib/php/Logger/logger.php';
+    require_once 'lib/php/DB/db.php';
+    require_once 'model/InputItem/Type.php';
 
     use lib\Logger as logger;
     use lib\db as db;
@@ -306,9 +307,9 @@
                             <label class="lg:w-1/5">配布種類</label>
                             <select class="lg:w-4/5 rounded border border-gray-400" name="type" onchange="changeCostEstimate();changeRequestElement();">
                                 <option value="">選択してください</option>
-                                <option value="1">PR</option>
-                                <option value="2">集客</option>
-                                <option value="3">求人</option>
+                                <?php foreach(EnumType::cases() as $type) {
+                                    echo "<option value=\"".$type->value."\">".$type->text()."</option>";
+                                } ?>
                             </select>
                         </div>
                         <div class="flex flex-col lg:flex-row gap-2 lg:items-center">
