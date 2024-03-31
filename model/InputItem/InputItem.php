@@ -6,7 +6,7 @@ class InputItem{
     protected $value;
 
     public function __construct($value) {
-        if (self::validate($value)) {
+        if ($this->validate($value)) {
             $this->value = $value;
         }
     }
@@ -15,7 +15,7 @@ class InputItem{
         return $this->value;
     }
 
-    private function validate($value) {
+    protected function validate($value) {
         // バリデーション処理をここに実装する
         // ここでは基底クラスでは常にtrueを返す（サブクラスでオーバーライドする）
         return true;

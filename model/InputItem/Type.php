@@ -20,11 +20,13 @@ enum EnumType: int{
 }
 
 class Type extends InputItem {
-    private function validate($value) {
+    #[\Override]
+    protected function validate($value) {
+        var_dump($value);
         if (empty($value)) {
             throw new Exception("配布区分が未選択です");
         }
-        $type = EnumType::tryfrom($value);
+          $type = EnumType::tryfrom($value);
         if ($type == null) {
             throw new Exception("配布区分が不正です");
         }

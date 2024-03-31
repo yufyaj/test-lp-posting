@@ -3,7 +3,8 @@
 require_once 'InputItem.php';
 
 class Mail extends InputItem{
-    private function validate($value) {
+    #[\Override]
+    protected function validate($value) {
         if (empty($value)) {
             throw new Exception("メールアドレスが未入力です");
         }

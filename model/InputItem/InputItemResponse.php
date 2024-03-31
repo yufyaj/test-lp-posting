@@ -10,7 +10,7 @@ class InputItemResponse{
     }
 
     public function setErrMsg($value) {
-        $this->errMsg = $value;
+        $this->errMsg .= $value."\n";
     }
 
     public function getResponseJson() {
