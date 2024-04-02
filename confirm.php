@@ -83,6 +83,7 @@ $token = $mailer->createToken();
                     <input type="hidden" name="name" value="<?= $name ?>" />
                     <input type="hidden" name="mail" value="<?= $mail ?>" />
                     <input type="hidden" name="token" value="<?= $token ?>" />
+                    <input type="hidden" name="privacy" value="<?= $privacy ?>" />
                     <div class="grid grid-cols-2 gap-2 justify-items-center py-5">
                         <button class="rounded text-white bg-gray-400 h-10 w-20 lg:w-52" onclick="back()" type="button">戻る</button>
                         <button class="rounded px-2 text-white bg-amber-500 h-10 w-20 lg:w-52">送信</button>
