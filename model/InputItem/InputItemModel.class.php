@@ -1,8 +1,6 @@
 <?php
 
-require_once 'InputItem.php';
-
-class InputItem{
+class InputItemModel{
     protected $value;
 
     public function __construct($value) {

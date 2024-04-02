@@ -1,10 +1,12 @@
 <?php
 
-require_once 'InputItem.php';
+require_once 'InputItemModel.class.php';
 
-class Busu extends InputItem{
+class Busu extends InputItemModel
+{
     #[\Override]
-    protected function validate($value) {
+    protected function validate($value)
+    {
         if (empty($value)) {
             throw new Exception("部数が未選択です");
         }
@@ -14,5 +16,3 @@ class Busu extends InputItem{
         return true;
     }
 }
-
-?>

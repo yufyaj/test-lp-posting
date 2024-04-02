@@ -1,10 +1,12 @@
 <?php
 
-require_once 'InputItem.php';
+require_once 'InputItemModel.class.php';
 
-class Privacy extends InputItem{
+class Privacy extends InputItemModel
+{
     #[\Override]
-    protected function validate($value) {
+    protected function validate($value)
+    {
         if (empty($value)) {
             throw new Exception("個人情報の取り扱いに同意してください");
         }
@@ -14,5 +16,3 @@ class Privacy extends InputItem{
         return true;
     }
 }
-
-?>

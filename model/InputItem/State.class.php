@@ -1,15 +1,15 @@
 <?php
 
-require_once 'InputItem.php';
+require_once 'InputItemModel.class.php';
 
-class State extends InputItem{
+class State extends InputItemModel
+{
     #[\Override]
-    protected function validate($value) {
+    protected function validate($value)
+    {
         if (empty($value)) {
             throw new Exception("都道府県が未選択です");
         }
         return true;
     }
 }
-
-?>
