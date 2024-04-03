@@ -2,81 +2,93 @@
 
 namespace lib\Mailer;
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/php/Logger/logger.php';
-require_once 'sendMail.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Logger/logger.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Session/managementSession.php';
 require_once 'config.php';
 
 use lib\logger\Logger;
+use lib\Session\ManagementSession;
 
-class Mailer{
+class Mailer
+{
 	//変換前の文字
-	private static $replaceStrBefore = array('①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','№','㈲','㈱','髙');
+	private static $replaceStrBefore = array('①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '№', '㈲', '㈱', '髙');
 	//変換後の文字
-	private static $replaceStrAfter = array('(1)','(2)','(3)','(4)','(5)','(6)','(7)','(8)','(9)','(10)','No.','（有）','（株）','高');
+	private static $replaceStrAfter = array('(1)', '(2)', '(3)', '(4)', '(5)', '(6)', '(7)', '(8)', '(9)', '(10)', 'No.', '（有）', '（株）', '高');
 
 	private static $singleton;
 	private static $log;
-
+	private static $session_path;
+	private static $manageSession;
+	private static $key = 'mailtoken';
 	/**
 	 * インスタンスを生成する
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (!isset(self::$singleton)) {
 			self::$singleton = new Mailer();
 		}
 		if (!isset(self::$log)) {
 			self::$log = Logger::getInstance();
 		}
+		if (!isset(self::$session_path)) {
+			self::$session_path = $_SERVER['DOCUMENT_ROOT'] . '/session';
+		}
+		if (!isset(self::$manageSession)) {
+			self::$manageSession = ManagementSession::getInstance();
+		}
 		return self::$singleton;
+	}
+
+	/**
+	 * CSRF対策
+	 */
+	public static function createToken()
+	{
+		return self::$manageSession::createToken(self::$key);
 	}
 
 	/**
 	 * メール送信
 	 */
-	public function sendMail($type,$state,$city,$busu,$cost,$company,$name,$mail,$token) {
-		if (self::isValidToken($token)) {
+	public static function sendMail($to, $cc, $subject, $body, $token)
+	{
+		if (!self::$manageSession::isValidToken(self::$key, $token)) {
 			return false;
 		}
-		sendMail($mail, null, "テストメール", "");
 
-		return true;
+		/** 内部文字エンコーディングをUTF-8に設定します*/
+		mb_language('uri');
+		mb_internal_encoding('UTF-8');
+
+		// 送信元メールアドレス
+		$from = 'webmas1@pos-con.com';
+
+		// 送信元の表示名
+		$from_name = 'System';
+
+		// 追加のヘッダー
+		$additional_headers = self::createHeader($from_name, $from);
+		// メールを送信
+		if (mb_send_mail($to, $subject, $body, $additional_headers, '-f' . $from)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
-	 * トークンを作成
-	 * @return トークン値
+	 * ヘッダーを作成する
 	 */
-	public function createToken() {
-		if (session_status() == PHP_SESSION_NONE) {
-			session_name('PHPMAILFORMSYSTEM');
-			session_start();
-		}
+	private static function createHeader($from_name, $from)
+	{
+		$additional_headers = "From: $from_name <$from>\r\n";
+		$additional_headers .= "Reply-To: $from\r\n";
+		$additional_headers .= "MIME-Version: 1.0\r\n";
+		$additional_headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+		$additional_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
-		//トークンをセット
-		$token = sha1(uniqid(mt_rand(), true));
-		$_SESSION['mailform_token'] = $token;
-		
-		return $token;
-	}
-
-	/**
-	 * トークンの正常判定
-	 * @param $token String トークン
-	 * @return bool True:正常, False:異常
-	 */
-	private function isValidToken($token) {
-		//トークンチェック（CSRF対策）
-		if(empty($_SESSION['mailform_token'])) {
-			return false;
-		}
-		if($_SESSION['mailform_token'] !== $token){
-			return false;
-		}
-		if(isset($_SESSION['mailform_token'])) {
-			unset($_SESSION['mailform_token']);//トークン破棄
-		}
-
-		return true;
+		return $additional_headers;
 	}
 }
-?>
