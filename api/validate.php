@@ -12,26 +12,7 @@ $log = logger\Logger::getInstance();
 if ($_SERVER["REQUEST_METHOD"] != "GET") {
     // ブラウザからHTMLページを要求された場合
 } else {
-    $type = $_GET['type'];
-    $state = $_GET['state'];
-    $city = $_GET['city'];
-    $busu = $_GET['busu'];
-    $cost = $_GET['cost'];
-    $company = $_GET['company'];
-    $name = $_GET['name'];
-    $mail = $_GET['mail'];
-    $privacy = $_GET['privacy'];
-
-    $inputItem = new InputItem();
-    $inputItem->setType($type);
-    $inputItem->setState($state);
-    $inputItem->setCity($city);
-    $inputItem->setBusu($busu);
-    $inputItem->setCost($cost);
-    $inputItem->setCompany($company);
-    $inputItem->setName($name);
-    $inputItem->setMail($mail);
-    $inputItem->setPrivacy($privacy);
+    $inputItem = new InputValidateQueryAllParameter($_GET);
 
     $responseJson = $inputItem->getResponseJson();
     echo $responseJson;

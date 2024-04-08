@@ -3,11 +3,11 @@
 namespace lib\Mailer;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Logger/logger.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Session/managementSession.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Cookie/cookie.php';
 require_once 'config.php';
 
 use lib\logger\Logger;
-use lib\Session\ManagementSession;
+use lib\Cookie\Cookie;
 
 class Mailer
 {
@@ -18,8 +18,6 @@ class Mailer
 
 	private static $singleton;
 	private static $log;
-	private static $session_path;
-	private static $manageSession;
 	private static $key = 'mailtoken';
 	/**
 	 * インスタンスを生成する
@@ -32,12 +30,6 @@ class Mailer
 		if (!isset(self::$log)) {
 			self::$log = Logger::getInstance();
 		}
-		if (!isset(self::$session_path)) {
-			self::$session_path = $_SERVER['DOCUMENT_ROOT'] . '/session';
-		}
-		if (!isset(self::$manageSession)) {
-			self::$manageSession = ManagementSession::getInstance();
-		}
 		return self::$singleton;
 	}
 
@@ -46,7 +38,8 @@ class Mailer
 	 */
 	public static function createToken()
 	{
-		return self::$manageSession::createToken(self::$key);
+		$cookie = new Cookie(self::$key);
+		return $cookie->getToken();
 	}
 
 	/**
@@ -54,12 +47,16 @@ class Mailer
 	 */
 	public static function sendMail($to, $cc, $subject, $body, $token)
 	{
-		if (!self::$manageSession::isValidToken(self::$key, $token)) {
+		if (empty($token)) {
+			return false;
+		}
+		$cookie = new Cookie(self::$key, $token);
+		if (!$cookie->isValidToken()) {
 			return false;
 		}
 
 		/** 内部文字エンコーディングをUTF-8に設定します*/
-		mb_language('uri');
+		mb_language('uni');
 		mb_internal_encoding('UTF-8');
 
 		// 送信元メールアドレス

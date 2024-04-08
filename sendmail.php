@@ -12,27 +12,7 @@ use lib\Mailer as mailer;
 $log = logger\Logger::getInstance();
 $mailer = mailer\Mailer::getInstance();
 
-$type = $_POST['type'];
-$state = $_POST['state'];
-$city = $_POST['city'];
-$busu = $_POST['busu'];
-$cost = $_POST['cost'];
-$company = $_POST['company'];
-$name = $_POST['name'];
-$mail = $_POST['mail'];
-$token = $_POST['token'];
-$privacy = $_POST['privacy'];
-
-$inputItem = new InputItem();
-$inputItem->setType($type);
-$inputItem->setState($state);
-$inputItem->setCity($city);
-$inputItem->setBusu($busu);
-$inputItem->setCost($cost);
-$inputItem->setCompany($company);
-$inputItem->setName($name);
-$inputItem->setMail($mail);
-$inputItem->setPrivacy($privacy);
+$inputItem = new InputValidateQueryAllParameter($_POST);
 
 $resultObject = json_decode($inputItem->getResponseJson());
 $errorMessage = "";
@@ -56,7 +36,7 @@ if (!$resultObject->Result) {
         "",
         "サンプルメール",
         "これはサンプルメールです",
-        $token
+        $_POST["token"]
     );
 }
 ?>

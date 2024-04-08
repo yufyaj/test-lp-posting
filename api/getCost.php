@@ -2,7 +2,7 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . '/lib/php/Logger/logger.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/lib/php/DB/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/InputItem/InputItem.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/InputItem/InputValidateQueryGetCostParameter.class.php';
 $pattern = $_SERVER['DOCUMENT_ROOT'] . '/model/InputItem/*.php';
 foreach (glob($pattern) as $filename) {
     require_once $filename;
@@ -18,17 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] != "GET") {
     // ブラウザからHTMLページを要求された場合
 } else {
     // フォームからGETによって要求された場合
-
-    $type = $_GET['type'];
-    $state = $_GET['state'];
-    $city = $_GET['city'];
-    $busu = $_GET['busu'];
-
-    $inputItem = new InputItem();
-    $inputItem->setType($type);
-    $inputItem->setState($state);
-    $inputItem->setCity($city);
-    $inputItem->setBusu($busu);
+    $inputItem = new InputValidateQueryGetCostParameter($_GET);
 
     $responseJson = $inputItem->getResponseJson();
     if (!json_decode($responseJson)->Result) {
