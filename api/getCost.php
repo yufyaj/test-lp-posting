@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] != "GET") {
     //SQLを作成
     $sql = "SELECT (cost * " . $inputItem->getBusu()->getValue() . ") AS cost FROM cost WHERE state = '" . $inputItem->getState()->getValue() . "'
                                                                                   AND city = '" . $inputItem->getCity()->getValue() . "' 
-                                                                                  AND type = '" . $inputItem->getType()->getValue() . "'";
+                                                                                  AND type = '" . $inputItem->getType()->getValue() . "' 
+                                                                                  AND number_of_copies = " . $inputItem->getBusu()->getValue();
 
     //$pdoにあるqueryメソッドを呼び出してSQLを実行
     //出力結果を$rowに代入

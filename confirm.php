@@ -2,6 +2,10 @@
 require_once 'lib/php/Logger/logger.php';
 require_once 'lib/php/Mailer/mailer.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/InputItem/EnumType.enum.php';
+$pattern = $_SERVER['DOCUMENT_ROOT'] . '/model/InputItem/*.php';
+foreach (glob($pattern) as $filename) {
+    require_once $filename;
+}
 
 use lib\Logger as logger;
 use lib\Mailer as mailer;
@@ -9,15 +13,7 @@ use lib\Mailer as mailer;
 $log = logger\Logger::getInstance();
 $mailer = mailer\Mailer::getInstance();
 
-$type = $_GET['type'];
-$state = $_GET['state'];
-$city = $_GET['city'];
-$busu = $_GET['busu'];
-$cost = $_GET['cost'];
-$company = $_GET['company'];
-$name = $_GET['name'];
-$mail = $_GET['mail'];
-$privacy = $_GET['privacy'];
+$inputItem = new InputValidateQueryAllParameter($_GET);
 $token = $mailer->createToken();
 ?>
 
@@ -49,7 +45,7 @@ $token = $mailer->createToken();
     </script>
     <script>
         function back() {
-            window.location = "/?type=<?= $type ?>&state=<?= $state ?>&city=<?= $city ?>&busu=<?= $busu ?>&cost=<?= $cost ?>&company=<?= $company ?>&name=<?= $name ?>&mail=<?= $mail ?>"
+            window.location = "/?type=<?= $inputItem->getType()->getValue() ?>&state=<?= $inputItem->getState()->getValue() ?>&city=<?= $inputItem->getCity()->getValue() ?>&busu=<?= $inputItem->getBusu()->getValue() ?>&cost=<?= $inputItem->getCost()->getValue() ?>&company=<?= $inputItem->getCompany()->getValue() ?>&name=<?= $inputItem->getName()->getValue() ?>&mail=<?= $inputItem->getMail()->getValue() ?>"
         }
     </script>
 
@@ -60,30 +56,30 @@ $token = $mailer->createToken();
         <div class="bg-slate-100 my-5 py-5 text-gray-700">
             <div class="py-5 px-5 lg:px-10 bg-white grid gap-1 w-95/100 container mx-auto">
                 <label class="font-bold">配布区分: </label>
-                <label class="h-8  bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= EnumType::from($type)->text() ?></label>
+                <label class="h-8  bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= EnumType::from($inputItem->getType()->getValue())->text() ?></label>
                 <label class="font-bold mt-3">都道府県: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $state ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $inputItem->getState()->getValue() ?></label>
                 <label class="font-bold mt-3">市区町村: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $city ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $inputItem->getCity()->getValue() ?></label>
                 <label class="font-bold mt-3">配布部数: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $busu ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= number_format($inputItem->getBusu()->getValue()) . "部" ?></label>
                 <label class="font-bold mt-3">貴社名: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $company ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $inputItem->getCompany()->getValue() ?></label>
                 <label class="font-bold mt-3">ご担当者名: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $name ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $inputItem->getName()->getValue() ?></label>
                 <label class="font-bold mt-3">メールアドレス: </label>
-                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $mail ?></label>
+                <label class="h-8 bg-slate-100 w-95/100 mx-5 indent-8 mh-auto flex items-center"><?= $inputItem->getMail()->getValue() ?></label>
                 <form action="./sendmail.php" method="POST">
-                    <input type="hidden" name="type" value="<?= $type ?>" />
-                    <input type="hidden" name="state" value="<?= $state ?>" />
-                    <input type="hidden" name="city" value="<?= $city ?>" />
-                    <input type="hidden" name="busu" value="<?= $busu ?>" />
-                    <input type="hidden" name="cost" value="<?= $cost ?>" />
-                    <input type="hidden" name="company" value="<?= $company ?>" />
-                    <input type="hidden" name="name" value="<?= $name ?>" />
-                    <input type="hidden" name="mail" value="<?= $mail ?>" />
+                    <input type="hidden" name="type" value="<?= $inputItem->getType()->getValue() ?>" />
+                    <input type="hidden" name="state" value="<?= $inputItem->getState()->getValue() ?>" />
+                    <input type="hidden" name="city" value="<?= $inputItem->getCity()->getValue() ?>" />
+                    <input type="hidden" name="busu" value="<?= $inputItem->getBusu()->getValue() ?>" />
+                    <input type="hidden" name="cost" value="<?= $inputItem->getCost()->getValue() ?>" />
+                    <input type="hidden" name="company" value="<?= $inputItem->getCompany()->getValue() ?>" />
+                    <input type="hidden" name="name" value="<?= $inputItem->getName()->getValue() ?>" />
+                    <input type="hidden" name="mail" value="<?= $inputItem->getMail()->getValue() ?>" />
                     <input type="hidden" name="token" value="<?= $token ?>" />
-                    <input type="hidden" name="privacy" value="<?= $privacy ?>" />
+                    <input type="hidden" name="privacy" value="<?= $inputItem->getPrivacy()->getValue() ?>" />
                     <div class="grid grid-cols-2 gap-2 justify-items-center py-5">
                         <button class="rounded text-white bg-gray-400 h-10 w-20 lg:w-52" onclick="back()" type="button">戻る</button>
                         <button class="rounded px-2 text-white bg-amber-500 h-10 w-20 lg:w-52">送信</button>

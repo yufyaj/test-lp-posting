@@ -23,15 +23,6 @@ if (!$resultObject->Result) {
 } else {
     /** tokenもオブジェクト化できそう */
     $result = $mailer->sendMail(
-        // $inputItem->getType()->getValue(),
-        // $inputItem->getState()->getValue(),
-        // $inputItem->getCity()->getValue(),
-        // $inputItem->getBusu()->getValue(),
-        // $inputItem->getCost()->getValue(),
-        // $inputItem->getCompany()->getValue(),
-        // $inputItem->getName()->getValue(),
-        // $inputItem->getMail()->getValue(),
-        // $token
         $inputItem->getMail()->getValue(),
         "",
         "サンプルメール",
@@ -69,7 +60,7 @@ if (!$resultObject->Result) {
     </script>
     <script>
         function back() {
-            window.location = "/?type=<?= $type ?>&state=<?= $state ?>&city=<?= $city ?>&busu=<?= $busu ?>&cost=<?= $cost ?>&company=<?= $company ?>&name=<?= $name ?>&mail=<?= $mail ?>"
+            window.location = "/?type=<?= $inputItem->getType()->getValue() ?>&state=<?= $inputItem->getState()->getValue() ?>&city=<?= $inputItem->getCity()->getValue() ?>&busu=<?= $inputItem->getBusu()->getValue() ?>&cost=<?= $inputItem->getCost()->getValue() ?>&company=<?= $inputItem->getCompany()->getValue() ?>&name=<?= $inputItem->getName()->getValue() ?>&mail=<?= $inputItem->getMail()->getValue() ?>"
         }
     </script>
 </head>

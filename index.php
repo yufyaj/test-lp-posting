@@ -17,6 +17,13 @@ $rows = $db->fetchAll($sql);
 //出力結果をそれぞれの配列に格納
 $states = array_column($rows, 'state');
 $cities = array_column($rows, 'city');
+
+//SQLを作成
+$numberOfCopiesSql = "SELECT number_of_copies FROM cost GROUP BY number_of_copies ORDER BY number_of_copies";
+$numberOfCopiesRows = $db->fetchAll($numberOfCopiesSql);
+
+//配列に格納
+$numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -315,17 +322,9 @@ $cities = array_column($rows, 'city');
                         <label class="lg:w-1/5">配布部数</label>
                         <select class="lg:w-4/5 rounded border border-gray-400" name="busu" onchange="changeCostEstimate();changeRequestElement();">
                             <option value="">選択してください</option>
-                            <option value="5000">5,000部～</option>
-                            <option value="10000">10,000部～</option>
-                            <option value="20000">20,000部～</option>
-                            <option value="30000">30,000部～</option>
-                            <option value="40000">40,000部～</option>
-                            <option value="50000">50,000部～</option>
-                            <option value="60000">60,000部～</option>
-                            <option value="70000">70,000部～</option>
-                            <option value="80000">80,000部～</option>
-                            <option value="90000">90,000部～</option>
-                            <option value="100000">100,000部以上～</option>
+                            <?php foreach (array_unique($numberOfCopies) as $numberOfCopy) {
+                                echo "<option value=\"$numberOfCopy\">" . number_format($numberOfCopy) . "部</option>";
+                            } ?>
                         </select>
                     </div>
                 </div>
@@ -352,15 +351,17 @@ $cities = array_column($rows, 'city');
                         <label class="lg:w-1/5">メールアドレス</label>
                         <input class="lg:w-4/5 rounded border border-gray-400" type="text" name="mail" value="" onchange="changeRequestElement()" placeholder="例）mail@mail.om" />
                     </div>
-                    <div class="grid grid-cols-1 py-5 items-center justify-items-center">
+                    <div class="grid grid-cols-1 py-5 items-center justify-items-center text-center">
                         <div>
-                            <input class="rounded" type="checkbox" name="privacy" onclick="changeRequestElement()" />
-                            <a href="privacy/" target="_blank">個人情報の取り扱い</a>に同意します。
+                            <div>
+                                <input class="rounded" type="checkbox" name="privacy" onclick="changeRequestElement()" title="個人情報の取り扱いを開いてください" disabled />
+                                <a class="text-blue-600 underline" href="https://www.gmp-inc.net/company/privacy.html" target="_blank" onclick="document.getElementsByName('privacy')[0].disabled = false">個人情報の取り扱い</a>に同意します。
+                            </div>
+                            <div class="text-xs">チェックボックスにチェックを入れる前に必ず個人情報の取り扱いを開いてください</div>
+                            <button class="rounded my-5 px-2 text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" onclick="getConfirm()" disabled id="send-request">正式見積を依頼する</button>
                         </div>
-                        <button class="rounded px-2 text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" onclick="getConfirm()" disabled id="send-request">正式見積を依頼する</button>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </body>
