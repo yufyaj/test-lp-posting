@@ -26,7 +26,7 @@ $numberOfCopiesRows = $db->fetchAll($numberOfCopiesSql);
 $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="bg-sub">
 
 <head>
     <link rel="canonical" href="https://posting-m.com/">
@@ -277,19 +277,77 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 
 </head>
 
-<body>
-    <div class="container mx-auto bg-white h-full">
+<body class="font-body">
+    <div class="container mx-auto space-y-5">
         <!-- ヘッダー -->
-        <div class="relative bg-slate-100 h-56">
-            <div class="grid grid-cols-1 lg:grid-cols-3 px-10 lg:px-80 gap-2 lg:gap-5 items-center justify-items-center lg:justify-items-start absolute bottom-5 w-full">
-                <button class="bg-sky-400 text-white h-10 w-40 lg:w-full" data-href="#mail" onclick="document.getElementsByName('type')[0].value='1';">PR</button>
-                <button class="bg-sky-400 text-white h-10 w-40 lg:w-full" data-href="#mail" onclick="document.getElementsByName('type')[0].value='2';">集客</button>
-                <button class="bg-sky-400 text-white h-10 w-40 lg:w-full" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
-            </div>
+        <div class="relative bg-main h-56">
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 px-10 my-5 lg:px-80 gap-2 lg:gap-5 items-center justify-items-center lg:justify-items-start w-full text-xl font-bold">
+            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='1';">PR</button>
+            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='2';">集客</button>
+            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
         </div>
 
         <!-- メインコンテンツ -->
-        <form class="bg-slate-100 my-5 py-2 text-gray-700" id="mail" action="./validate.php" method="get">
+        <!-- 選べる配布方法 -->
+        <div class="bg-main pb-2 pt-2 text-gray-700">
+            <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100">
+                <h1 class="text-2xl font-bold">選べる配布方法</h1>
+                <div class="grid grid-cols-2 pt-2 space-y-2 mt-5">
+                    <h1>・標準配布</h1>
+                    <h1>・一軒家</h1>
+                    <h1>・集合住宅配布</h1>
+                    <h1>・企業</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- 30年やっているからできる細やかなサービス -->
+        <div class="pb-2 pt-2 text-gray-700">
+            <h1 class="text-4xl py-5 font-bold text-center">30年やっているからできる細やかなサービス</h1>
+            <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100">
+                <h1 class="font-bold">選べる配布方法</h1>
+                <div class="grid grid-cols-1 pt-2 space-y-2">
+                    <h1>・GPS管理</h1>
+                    <h1>・配布禁止物件のデータ</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- お客様の声 -->
+        <div class="bg-main pb-2 pt-2 text-gray-700">
+            <h1 class="text-4xl py-5 pl-10 font-bold">お客様の声</h1>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-2 px-10">
+                <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full mr-3 pr-5">
+                    <div class="grid grid-cols-1 pt-2 space-y-2">
+                        <h1>・GPS管理</h1>
+                        <h1>・配布禁止物件のデータ</h1>
+                    </div>
+                </div>
+                <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full pr-3">
+                    <div class="grid grid-cols-1 pt-2 space-y-2">
+                        <h1>・GPS管理</h1>
+                        <h1>・配布禁止物件のデータ</h1>
+                    </div>
+                </div>
+                <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full">
+                    <div class="grid grid-cols-1 pt-2 space-y-2">
+                        <h1>・GPS管理</h1>
+                        <h1>・配布禁止物件のデータ</h1>
+                    </div>
+                </div>
+                <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full">
+                    <div class="grid grid-cols-1 pt-2 space-y-2">
+                        <h1>・GPS管理</h1>
+                        <h1>・配布禁止物件のデータ</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 簡易見積 -->
+        <form class="pb-2 text-gray-700" id="mail" action="./validate.php" method="get">
             <h1 class="text-4xl py-5 font-bold text-center">簡易見積</h1>
             <div class="bg-white mx-auto rounded px-5 lg:px-10 py-5 w-95/100">
                 <label class="text-red-600" id="label_error"></label>
