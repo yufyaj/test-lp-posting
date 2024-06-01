@@ -7,9 +7,7 @@ module.exports = {
         '95/100': '95%',
       },
       colors: {
-        'main': '#feee7d',
-        'sub': '#a5dff9',
-        'moji': '#34314c',
+        'main': 'rgb(241, 245, 249)'
       }
     },
     fontFamily: {

@@ -280,7 +280,8 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 <body class="font-body">
     <div class="container mx-auto space-y-5">
         <!-- ヘッダー -->
-        <div class="relative bg-main h-56">
+        <div class="relative bg-main h-96">
+            <img src="/image/img_header.svg" class="w-full h-full object-cover object-center">
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 px-10 my-5 lg:px-80 gap-2 lg:gap-5 items-center justify-items-center lg:justify-items-start w-full text-xl font-bold">

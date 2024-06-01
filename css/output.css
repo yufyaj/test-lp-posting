@@ -643,12 +643,12 @@ video {
   height: 2.5rem;
 }
 
-.h-56 {
-  height: 14rem;
-}
-
 .h-8 {
   height: 2rem;
+}
+
+.h-96 {
+  height: 24rem;
 }
 
 .h-full {
@@ -758,7 +758,7 @@ video {
 
 .bg-main {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 238 125 / var(--tw-bg-opacity));
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
 .bg-sky-400 {
@@ -771,14 +771,19 @@ video {
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
-.bg-sub {
-  --tw-bg-opacity: 1;
-  background-color: rgb(165 223 249 / var(--tw-bg-opacity));
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.object-center {
+  -o-object-position: center;
+     object-position: center;
 }
 
 .px-10 {
