@@ -287,42 +287,116 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
         <div class="grid grid-cols-1 lg:grid-cols-3 px-10 my-5 lg:px-80 gap-2 lg:gap-5 items-center justify-items-center lg:justify-items-start w-full text-xl font-bold">
             <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='1';">PR</button>
             <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='2';">集客</button>
-            <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
+            <button disabled class="bg-slate-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
         </div>
 
         <!-- メインコンテンツ -->
-        <!-- 選べる配布方法 -->
+        <!-- ポスティング広告の力 -->
         <div class="bg-main pb-2 pt-2 text-gray-700">
             <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100 text-center">
                 <h1 class="text-2xl mx-auto">手軽に始める効果的な宣伝</h1>
                 <h1 class="text-4xl font-bold text-text-main px-auto">ポスティング広告の力</h1>
                 <div class="pt-2 space-y-2 mt-5">
+                    <!-- 実績1 -->
                     <div class="bg-element-bg-main rounded-3xl lg:rounded-full w-full text-left space-y-3 space-x-3 py-14 lg:py-4">
                         <div class="flex">
-                            <div class="w-2/12 lg:w-1/12 text-yellow-400">画像</div>
-                            <div class="w-8/12 lg:w-10/12">
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(100px,300px)] max-w-none -ml-6" src="/image/achievement_1.svg">
+                            </div>
+                            <div class="w-8/12 lg:w-10/12 space-y-3">
                                 <h1 class="text-text-sub font-bold border-text-sub border-b border-dotted text-xl">渋谷区 店舗オープン　イベントチラシ</h1>
                                 <div class="text-white">新規開店する携帯キャリアショップのオープニングイベントの告知チラシを店
-                                    舗中心に1万部選別に無しに配布。オープン当日に<span class="bg-red-500 text-lg">来場者200名、契約 30件</span>の効果に繋がり、当時のオープニング時最大の来場者となりました。</div>
+                                    舗中心に1万部選別に無しに配布。オープン当日に<span class="bg-red-500 text-lg">来場者200名、契約 30件</span>の効果に繋がり、当時のオープニング時最大の来場者となりました。
+                                </div>
+                                <div class="flex flex-row-reverse pr-10">
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center">・来店者↑</span>
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center mr-3">・契約↑</span>
+                                </div>
                             </div>
-                            <div class="w-2/12 lg:w-1/12 text-yellow-400">画像</div>
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(60px,200px)] max-w-none " src="/image/store.svg">
+                            </div>
                         </div>
-                        <div class="flex flex-row-reverse pr-10">
-                            <span class="w-32 font-bold text-red-500 bg-white rounded-full text-center">・来店者↑</span>
-                            <span class="w-32 font-bold text-red-500 bg-white rounded-full text-center mr-3">・来店者↑</span>
+                    </div>
+                    <!-- 実績2 -->
+                    <div class="bg-element-bg-main rounded-3xl lg:rounded-full w-full text-left space-y-3 space-x-3 py-14 lg:py-4">
+                        <div class="flex">
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(100px,300px)] max-w-none -ml-6" src="/image/achievement_2.svg">
+                            </div>
+                            <div class="w-8/12 lg:w-10/12 space-y-3">
+                                <h1 class="text-text-sub font-bold border-text-sub border-b border-dotted text-xl">千葉市 大手物流倉庫　求人チラシ</h1>
+                                <div class="text-white">新規オープンに伴い、近隣の年収500万円以下の世帯が多いエリアをピック アップ。4万部の求人チラシを配布しました。想定20件の応募想定でしたが、その倍以上の
+                                    <span class="bg-red-500 text-lg">44件の応募</span>
+                                    を獲得。他媒体と比較でも、全体のうち
+                                    <span class="bg-red-500 text-lg">60％が求人チラシからの応募</span>
+                                    となり求人への効果を発揮しました。
+                                </div>
+                                <div class="pr-10 grid grid-cols-1 lg:flex lg:flex-row-reverse">
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center justify-self-end">・求人応募↑</span>
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center justify-self-end mt-3 lg:mt-0 lg:mr-3">・他媒体より効果↑</span>
+                                </div>
+                            </div>
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(60px,200px)] max-w-none " src="/image/warehouse.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 実績3 -->
+                    <div class="bg-element-bg-main rounded-3xl lg:rounded-full w-full text-left space-y-3 space-x-3 py-14 lg:py-4">
+                        <div class="flex">
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(100px,300px)] max-w-none -ml-6" src="/image/achievement_3.svg">
+                            </div>
+                            <div class="w-8/12 lg:w-10/12 space-y-3">
+                                <h1 class="text-text-sub font-bold border-text-sub border-b border-dotted text-xl">横浜市 スーパー　クーポン付チラシ</h1>
+                                <div class="text-white">スーパーの割引クーポン付チラシを店舗周辺に選別無しで5万部配布。
+                                    <span class="bg-red-500 text-lg">クーポンの回収率が600枚を超え1.2％の回収率</span>となり、スーパーの売上増に貢献しました。
+                                </div>
+
+                                <div class="flex flex-row-reverse pr-10">
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center">・来店者↑</span>
+                                    <span class="w-40 font-bold text-red-500 bg-white rounded-full text-center mr-3">・売上↑</span>
+                                </div>
+                            </div>
+                            <div class="w-2/12 lg:w-1/12 my-auto">
+                                <img class="w-[min(60px,200px)] max-w-none " src="/image/shop.svg">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 30年やっているからできる細やかなサービス -->
+        <!-- 「安い!早い!丁寧!」なポスティング -->
         <div class="pb-2 pt-2 text-gray-700 text-center">
             <h1 class="text-4xl text-text-main px-auto"><span class="font-bold">「安い!早い!丁寧!」</span>なポスティング</h1>
+            <!-- 首都圏に多数の拠点&全国ネットワーク -->
             <div class="bg-element-bg-main text-text-sub font-bold text-left my-5 py-3 px-5 lg:w-125 rounded-r-full">首都圏に多数の拠点&全国ネットワーク</div>
             <div class="bg-white rounded py-5 w-95/100">
+            </div>
+            <!-- ジーエムピーのポスティングの特徴&強み -->
+            <div class="bg-element-bg-main text-text-sub font-bold text-left my-5 py-3 px-5 lg:w-125 rounded-r-full">ジーエムピーのポスティングの特徴&強み</div>
+            <div class="bg-white rounded py-5 w-95/100">
                 <div class="grid grid-cols-1 pt-2 space-y-2">
-                    <h1>画像データ</h1>
+                    <ul class="text-text-main font-bold w-full grid grid-cols-1 lg:grid-cols-4">
+                        <li class="text-center">
+                            <img class="mx-auto w-28 h-44" src="/image/good.svg">
+                            選んで安心!業界最安級
+                        </li>
+                        <li>
+                            <img class="mx-auto w-52 h-44" src="/image/map.svg">
+                            エリアマーケティングでターゲット選定可能
+                        </li>
+                        <li>
+                            <img class="mx-auto w-28 h-44" src="/image/flyer.svg">
+                            効果的なチラシデザイン
+                        </li>
+                        <li>
+                            <img class="mx-auto w-36 h-44" src="/image/bike.svg">
+                            全国配布可能!
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -333,26 +407,22 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-2 px-10">
                 <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full mr-3 pr-5">
                     <div class="grid grid-cols-1 pt-2 space-y-2">
-                        <h1>・GPS管理</h1>
-                        <h1>・配布禁止物件のデータ</h1>
+                        準備中
                     </div>
                 </div>
                 <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full pr-3">
                     <div class="grid grid-cols-1 pt-2 space-y-2">
-                        <h1>・GPS管理</h1>
-                        <h1>・配布禁止物件のデータ</h1>
+                        準備中
                     </div>
                 </div>
                 <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full">
                     <div class="grid grid-cols-1 pt-2 space-y-2">
-                        <h1>・GPS管理</h1>
-                        <h1>・配布禁止物件のデータ</h1>
+                        準備中
                     </div>
                 </div>
                 <div class="bg-white mx-auto rounded my-5 lg:px-10 py-5 w-full">
                     <div class="grid grid-cols-1 pt-2 space-y-2">
-                        <h1>・GPS管理</h1>
-                        <h1>・配布禁止物件のデータ</h1>
+                        準備中
                     </div>
                 </div>
             </div>
