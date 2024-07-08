@@ -11,7 +11,7 @@ $log = logger\Logger::getInstance();
 $db = db\ConnectDb::getInstance();
 
 //SQLを作成
-$sql = "SELECT state, city FROM cost GROUP BY state, city";
+$sql = "SELECT state, city FROM cost GROUP BY state, city ORDER BY id";
 $rows = $db->fetchAll($sql);
 
 //出力結果をそれぞれの配列に格納
