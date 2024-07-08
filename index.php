@@ -373,7 +373,9 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
             <h1 class="mb-10 text-4xl text-text-main px-auto"><span class="font-bold">「安い!早い!丁寧!」</span>なポスティング</h1>
             <!-- 首都圏に多数の拠点&全国ネットワーク -->
             <div class="bg-element-bg-main text-text-sub font-bold text-left my-5 py-3 px-5 lg:w-125 rounded-r-full">首都圏に多数の拠点&全国ネットワーク</div>
-            <div class="bg-white rounded py-5 w-95/100">
+            <div class="bg-white rounded py-5 w-95/100 grid grid-cols-1 lg:grid-cols-3 gap-x-8 mx-auto">
+                <span class="h-full flex items-center text-left">都内最大の自社配布体制！さらに 長年構築したネットワークを通じて、全国への配布体制を完備。お客様のご要望に寄り添った強力で安心なポスティングサービスをご提供します。</span>
+                <img class="h-72 col-span-2" src="/image/tokyo.svg">
             </div>
             <!-- ジーエムピーのポスティングの特徴&強み -->
             <div class="bg-element-bg-main text-text-sub font-bold text-left my-5 py-3 px-5 lg:w-125 rounded-r-full">ジーエムピーのポスティングの特徴&強み</div>
