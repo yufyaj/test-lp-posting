@@ -285,33 +285,44 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 px-10 my-5 lg:px-80 gap-2 lg:gap-5 items-center justify-items-center lg:justify-items-start w-full text-xl font-bold">
-            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='1';">PR</button>
-            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='2';">集客</button>
-            <button class="bg-sky-400 text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
+            <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='1';">PR</button>
+            <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='2';">集客</button>
+            <button class="bg-element-bg-main text-white h-10 w-40 lg:w-full border border-solid border-white" data-href="#mail" onclick="document.getElementsByName('type')[0].value='3';">求人</button>
         </div>
 
         <!-- メインコンテンツ -->
         <!-- 選べる配布方法 -->
         <div class="bg-main pb-2 pt-2 text-gray-700">
-            <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100">
-                <h1 class="text-2xl font-bold">選べる配布方法</h1>
-                <div class="grid grid-cols-2 pt-2 space-y-2 mt-5">
-                    <h1>・標準配布</h1>
-                    <h1>・一軒家</h1>
-                    <h1>・集合住宅配布</h1>
-                    <h1>・企業</h1>
+            <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100 text-center">
+                <h1 class="text-2xl mx-auto">手軽に始める効果的な宣伝</h1>
+                <h1 class="text-4xl font-bold text-text-main px-auto">ポスティング広告の力</h1>
+                <div class="pt-2 space-y-2 mt-5">
+                    <div class="bg-element-bg-main rounded-3xl lg:rounded-full w-full text-left space-y-3 space-x-3 py-14 lg:py-4">
+                        <div class="flex">
+                            <div class="w-2/12 lg:w-1/12 text-yellow-400">画像</div>
+                            <div class="w-8/12 lg:w-10/12">
+                                <h1 class="text-text-sub font-bold border-text-sub border-b border-dotted text-xl">渋谷区 店舗オープン　イベントチラシ</h1>
+                                <div class="text-white">新規開店する携帯キャリアショップのオープニングイベントの告知チラシを店
+                                    舗中心に1万部選別に無しに配布。オープン当日に<span class="bg-red-500 text-lg">来場者200名、契約 30件</span>の効果に繋がり、当時のオープニング時最大の来場者となりました。</div>
+                            </div>
+                            <div class="w-2/12 lg:w-1/12 text-yellow-400">画像</div>
+                        </div>
+                        <div class="flex flex-row-reverse pr-10">
+                            <span class="w-32 font-bold text-red-500 bg-white rounded-full text-center">・来店者↑</span>
+                            <span class="w-32 font-bold text-red-500 bg-white rounded-full text-center mr-3">・来店者↑</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- 30年やっているからできる細やかなサービス -->
-        <div class="pb-2 pt-2 text-gray-700">
-            <h1 class="text-4xl py-5 font-bold text-center">30年やっているからできる細やかなサービス</h1>
-            <div class="bg-white mx-auto rounded px-5 my-5 lg:px-10 py-5 w-95/100">
-                <h1 class="font-bold">選べる配布方法</h1>
+        <div class="pb-2 pt-2 text-gray-700 text-center">
+            <h1 class="text-4xl text-text-main px-auto"><span class="font-bold">「安い!早い!丁寧!」</span>なポスティング</h1>
+            <div class="bg-element-bg-main text-text-sub font-bold text-left my-5 py-3 px-5 lg:w-125 rounded-r-full">首都圏に多数の拠点&全国ネットワーク</div>
+            <div class="bg-white rounded py-5 w-95/100">
                 <div class="grid grid-cols-1 pt-2 space-y-2">
-                    <h1>・GPS管理</h1>
-                    <h1>・配布禁止物件のデータ</h1>
+                    <h1>画像データ</h1>
                 </div>
             </div>
         </div>
