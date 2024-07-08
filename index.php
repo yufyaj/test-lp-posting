@@ -111,7 +111,7 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 
         // 価格の初期化
         function clearCostValue() {
-            document.getElementById('label_cost').innerText = "---";
+            document.getElementById('label_cost').innerText = "見積金額は---です。";
             document.getElementsByName('cost')[0].value = "";
         }
 
@@ -160,7 +160,7 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
             const resp_json = await resp.json();
             if (resp_json.Result) {
                 // 価格の表示
-                document.getElementById('label_cost').innerText = resp_json.Cost.toLocaleString();
+                document.getElementById('label_cost').innerText = (resp_json.Cost == 0) ? '要正式お見積り' : '見積金額は' + Number(resp_json.Cost).toLocaleString() + '円です';
                 document.getElementsByName('cost')[0].value = resp_json.Cost.toLocaleString();
                 $(function() {
                     if ($("#send-info").is(":hidden")) {
@@ -238,7 +238,7 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
 
             changeCostEstimate();
             if (cost) {
-                document.getElementById('label_cost').innerText = cost;
+                document.getElementById('label_cost').innerText = (cost == 0) ? '要正式お見積り' : '見積金額は' + Number(cost).toLocaleString() + '円です';;
                 document.getElementsByName('cost')[0].value = cost;
                 $("#send-info").slideDown();
             }
@@ -392,20 +392,23 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
                         <label class="lg:w-1/5">配布部数</label>
                         <select class="lg:w-4/5 rounded border border-gray-400" name="busu" onchange="changeCostEstimate();changeRequestElement();">
                             <option value="">選択してください</option>
-                            <?php foreach (array_unique($numberOfCopies) as $numberOfCopy) {
+                            <option value="1000">1,000部</option>
+                            <option value="2000">2,000部</option>
+                            <option value="3000">3,000部</option>
+                            <option value="5000">5,000部</option>
+                            <option value="10000">10,000部</option>
+                            <option value="30000">30,000部</option>
+                            <option value="50000">50,000部</option>
+                            <?php /*foreach (array_unique($numberOfCopies) as $numberOfCopy) {
                                 echo "<option value=\"$numberOfCopy\">" . number_format($numberOfCopy) . "部</option>";
-                            } ?>
+                            } */ ?>
                         </select>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 py-5 items-center justify-items-center">
                     <input type="hidden" name="cost" />
                     <button class="rounded text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" id="get-cost" onclick="getCost()" disabled>見積を算出する</button>
-                    <div>
-                        見積金額は
-                        <label id="label_cost">---</label>
-                        です。
-                    </div>
+                    <label id="label_cost"></label>
                 </div>
 
                 <div class="flex flex-col gap-4 top-20" id="send-info" style="display:none">

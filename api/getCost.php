@@ -27,10 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] != "GET") {
     }
 
     //SQLを作成
+    // 一時的に配布部数を調べる条件は1000で固定
+    // 配布部数毎に価格を決める際は、1000=>$inputItem->getBusu()->getValue()に置き換え
     $sql = "SELECT (cost * " . $inputItem->getBusu()->getValue() . ") AS cost FROM cost WHERE state = '" . $inputItem->getState()->getValue() . "'
                                                                                   AND city = '" . $inputItem->getCity()->getValue() . "' 
                                                                                   AND type = '" . $inputItem->getType()->getValue() . "' 
-                                                                                  AND number_of_copies = " . $inputItem->getBusu()->getValue();
+                                                                                  AND number_of_copies = " . "1000";
 
     //$pdoにあるqueryメソッドを呼び出してSQLを実行
     //出力結果を$rowに代入
