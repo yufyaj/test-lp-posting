@@ -118,6 +118,7 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
         // 見積依頼項目に変更があった際の動作
         function changeRequestElement() {
             const elementRequestButton = document.getElementById('send-request');
+            const elementGotoPosmatchButton = document.getElementById('goto-posmatch');
 
             if (!document.getElementsByName('cost')[0].value) {
                 elementRequestButton.disabled = true;
@@ -142,6 +143,7 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
             }
 
             elementRequestButton.disabled = false;
+            elementGotoPosmatchButton.disabled = false;
         }
 
         async function getCost() {
@@ -200,6 +202,10 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
                 // エラーメッセージの表示
                 document.getElementById('label_error').innerText = resp_json.ErrorMessage;
             }
+        }
+
+        function gotoPosMatch() {
+            window.open("https://google.co.jp");
         }
     </script>
     <script>
@@ -496,10 +502,13 @@ $numberOfCopies = array_column($numberOfCopiesRows, 'number_of_copies');
                         <div>
                             <div>
                                 <input class="rounded" type="checkbox" name="privacy" onclick="changeRequestElement()" title="個人情報の取り扱いを開いてください" disabled />
-                                <a class="text-blue-600 underline" href="https://www.gmp-inc.net/company/privacy.html" target="_blank" onclick="document.getElementsByName('privacy')[0].disabled = false">個人情報の取り扱い</a>に同意します。
+                                <a class="text-blue-600 underline" href="https://www.gmp-inc.net/company/privacy.html" target="_blank" onclick="document.getElementsByName('privacy')[0].disabled = false;">個人情報の取り扱い</a>に同意します。
                             </div>
                             <div class="text-xs">チェックボックスにチェックを入れる前に必ず個人情報の取り扱いを開いてください</div>
-                            <button class="rounded my-5 px-2 text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" onclick="getConfirm()" disabled id="send-request">正式見積を依頼する</button>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-2 px-10">
+                                <button class="rounded my-5 px-2 text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" onclick="getConfirm()" disabled id="send-request">正式見積を依頼する</button>
+                                <button class="rounded my-5 px-2 text-white disabled:text-gray-500 bg-amber-500 disabled:bg-gray-400 h-10 w-52" type="button" onclick="gotoPosMatch()" disabled id="goto-posmatch">ポスコンサイトへ遷移する</button>
+                            </div>
                         </div>
                     </div>
                 </div>
